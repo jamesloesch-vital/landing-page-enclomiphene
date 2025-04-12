@@ -116,6 +116,10 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+    /* margin-top: 40px; */ /* Removed margin-top */
+    order: -1; /* Place image above text */
+    /* margin-bottom: 40px; */ /* Add space below image */
+    margin-bottom: 0; /* Removed space below image */
 }
 
 .hero-image-bg {
@@ -138,9 +142,21 @@ button {
 
 /* Responsive Styles (Example for Hero) */
 @media (max-width: 768px) {
+    /* Navbar Mobile Adjustments */
+    .navbar-container {
+        justify-content: center; /* Center the logo */
+    }
+    .navbar-logo {
+        height: 25px; /* Make logo smaller */
+    }
+    .navbar-cta {
+        display: none; /* Hide GET STARTED button */
+    }
+
+    /* Hero Mobile Adjustments */
     .hero-container {
         flex-direction: column;
-        text-align: center;
+        text-align: left;
     }
 
     .hero-content h1 {
@@ -152,20 +168,22 @@ button {
     }
 
     .hero-image-wrapper {
-        margin-top: 40px;
+        /* margin-top: 40px; */ /* Removed margin-top */
+        order: -1; /* Place image above text */
+        /* margin-bottom: 40px; */ /* Add space below image */
+        margin-bottom: 20px; /* Reduced space below image */
     }
 
     .hero-image-bg {
-        width: 90%;
-        max-width: 608px;
-        height: auto;
-        padding: 20px 0;
+        width: 325px;
+        height: 315px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .hero-image {
-        width: 60%;
-        max-width: 235px;
-        height: auto;
+        width: 125px;
+        height: 255px;
     }
 }
 
@@ -192,15 +210,18 @@ button {
 
 .process-cards {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 30px;
+    /* flex-wrap: wrap; */ /* Removed */
 }
 
 .process-card {
     background-color: #FFFFFF; /* Card Background */
     border-radius: 20px;
     padding: 50px 30px 40px 30px; /* Increased top padding */
-    width: 371px;
+    /* width: calc(50% - 15px); */ /* Changed */
+    width: calc(25% - 22.5px); /* Changed: 4 cards across, 30px gap */
+    max-width: 371px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     text-align: center;
     box-sizing: border-box; /* Include padding in width/height */
@@ -254,10 +275,12 @@ button {
 /* Responsive Styles for Process Section */
 @media (max-width: 1200px) {
     .process-cards {
-        gap: 20px;
+        gap: 30px; /* Keep gap consistent or adjust */
+        flex-wrap: wrap; /* Add wrap back for 2x2 grid */
     }
     .process-card {
-        width: calc(33.333% - 20px);
+        /* width: calc(33.333% - 20px); */ /* Changed */
+        width: calc(50% - 15px); /* Changed: 2 cards across */
         padding: 30px 20px;
     }
 }
@@ -351,7 +374,7 @@ button {
 
     .explainer-content-col {
         order: 2; /* Text below image on mobile */
-        text-align: center;
+        text-align: left; /* Align text and button left */
     }
 
     .explainer-image-col {
@@ -524,7 +547,7 @@ button {
         flex-direction: column; /* Stack all rows */
         gap: 30px;
         margin-bottom: 50px;
-        text-align: center;
+        text-align: left; /* Left-align text */
     }
 
     .benefit-content h3 {
@@ -646,20 +669,19 @@ button {
     .checkout-container {
         flex-direction: column;
         gap: 40px;
-        text-align: center;
+        text-align: left; /* Left-align content */
     }
 
     .checkout-image-bg {
-        width: 90%; /* Make width responsive */
-        max-width: 579px;
-        height: auto; /* Adjust height */
-        padding: 20px 0; /* Add vertical padding for spacing */
+        width: 325px; /* Consistent width with hero */
+        height: 315px; /* Consistent height with hero */
+        margin-left: auto; /* Center the background box */
+        margin-right: auto;
     }
 
     .checkout-image {
-        width: 60%; /* Adjust image size relative to container */
-        max-width: 223.79px;
-        height: auto;
+        width: 125px; /* Consistent width with hero */
+        height: 255px; /* Consistent height with hero */
     }
 
     .checkout-content-col h2 {
@@ -667,10 +689,7 @@ button {
     }
 
     .checkout-features {
-        margin-left: auto; /* Center list items */
-        margin-right: auto;
-        display: inline-block; /* Allow centering */
-        text-align: left; /* Keep text left-aligned */
+        padding-left: 0; /* Ensure list aligns left if needed */
     }
 
     .checkout-pricing {
