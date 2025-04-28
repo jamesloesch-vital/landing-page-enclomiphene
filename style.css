@@ -72,6 +72,29 @@ button {
     /* border-radius: 8px; */ /* Remove specific border-radius */
 }
 
+/* Styles for Navbar Contact Info */
+.navbar-logo-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the start */
+}
+
+.navbar-contact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px; /* Space below logo */
+    font-size: 14px;
+    color: #F9F7F3; /* Light Text */
+    opacity: 0.8;
+}
+
+.navbar-contact svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+}
+
 /* Hero Section Styles */
 .hero {
     background: linear-gradient(to right, #9A805B, #342B1F);
@@ -146,8 +169,17 @@ button {
     .navbar-container {
         justify-content: center; /* Center the logo */
     }
+    /* .navbar-logo { */
+        /* height: 25px; */ /* Make logo smaller */
+    /* } */
+    .navbar-logo-contact { /* Adjustments for the container */
+        align-items: center; /* Center logo and contact on mobile */
+    }
     .navbar-logo {
         height: 25px; /* Make logo smaller */
+    }
+    .navbar-contact {
+        display: none; /* Hide contact info on mobile */
     }
     .navbar-cta {
         display: none; /* Hide GET STARTED button */
@@ -655,6 +687,46 @@ button {
     margin-left: 5px;
 }
 
+.strikethrough-price {
+    font-size: 22px;
+    font-weight: 400;
+    color: #E94545; /* Red color for strikethrough price */
+    text-decoration: line-through;
+    margin-left: 20px;
+    display: inline-block;
+}
+
+span.strikethrough-price {
+    margin-left: 20px;
+    color: #E94545;
+}
+
+.checkout-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.pricing-plan-dropdown {
+    background-color: #FFFFFF;
+    border: 1px solid #CEC0AD;
+    border-radius: 50px;
+    padding: 15px 20px;
+    font-family: 'LT Superior', sans-serif;
+    font-size: 16px;
+    color: #333;
+    font-weight: 400;
+    cursor: pointer;
+    outline: none;
+    min-width: 150px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+}
+
 .checkout-cta {
     background-color: #906323; /* Button Accent */
     color: #FFFFFF; /* Light Text */
@@ -694,6 +766,16 @@ button {
 
     .checkout-pricing {
         font-size: 40px;
+    }
+    
+    .checkout-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .pricing-plan-dropdown {
+        width: 100%;
     }
 }
 
@@ -867,6 +949,21 @@ button {
     opacity: 0.8;
 }
 
+.footer-contact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.footer-contact svg {
+    width: 14px; /* Slightly smaller to match font */
+    height: 14px;
+    fill: currentColor;
+}
+
 .footer-legal {
     text-align: right;
 }
@@ -906,8 +1003,14 @@ button {
         gap: 20px;
         padding-top: 30px;
     }
-    .footer-logo {
-        order: 1;
+    .footer-logo-contact {
+        order: 1; /* Ensure logo + contact group comes first */
+        display: flex; /* Allow centering */
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer-contact {
+        margin-top: 10px; /* Keep spacing consistent */
     }
     .footer-legal {
         order: 2;
