@@ -381,6 +381,7 @@
       
       ctaButtons.forEach(btn => {
         btn.addEventListener('click', () => {
+            console.log('CTA clicked – sending to Meta'); // <-- NEW
           fbq('trackCustom', 'LPButtonClick', {button_text: btn.textContent.trim(), button_location: btn.className});
         });
       });
