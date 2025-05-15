@@ -373,6 +373,20 @@
         </div>
     </div>
 
+    <!-- Facebook Button Click Tracking -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Target all CTA buttons with different class names
+      const ctaButtons = document.querySelectorAll('.navbar-cta, .hero-cta, .explainer-cta, .checkout-cta, .footer-cta, .popup-cta');
+      
+      ctaButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          fbq('trackCustom', 'LPButtonClick', {button_text: btn.textContent.trim(), button_location: btn.className});
+        });
+      });
+    });
+    </script>
+
     <!-- CustomerIO Tracking Code -->
     <script type="text/javascript">
       var _cio = _cio || [];
