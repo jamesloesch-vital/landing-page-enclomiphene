@@ -376,13 +376,44 @@
     <!-- Facebook Button Click Tracking -->
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Verify fbq is available
+      if (typeof fbq !== 'function') {
+        console.error('Facebook Pixel fbq function not available');
+        return;
+      }
+
       // Target all CTA buttons with different class names
       const ctaButtons = document.querySelectorAll('.navbar-cta, .hero-cta, .explainer-cta, .checkout-cta, .footer-cta, .popup-cta');
       
       ctaButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            console.log('CTA clicked – sending to Meta'); // <-- NEW
-          fbq('trackCustom', 'LPButtonClick', {button_text: btn.textContent.trim(), button_location: btn.className});
+        btn.addEventListener('click', (e) => {
+          console.log('CTA clicked – sending to Meta'); // <-- NEW
+          
+          // Get the parent anchor if there is one
+          const parentAnchor = btn.closest('a');
+          
+          if (parentAnchor) {
+            // Prevent the default anchor navigation
+            e.preventDefault();
+            
+            // Track the event first
+            fbq('trackCustom', 'LPButtonClick', {
+              button_text: btn.textContent.trim(),
+              button_location: btn.className,
+              destination: parentAnchor.href
+            });
+            
+            // Navigate after a small delay to ensure the event is sent
+            setTimeout(() => {
+              window.location.href = parentAnchor.href;
+            }, 300);
+          } else {
+            // Just track the event if it's not in an anchor
+            fbq('trackCustom', 'LPButtonClick', {
+              button_text: btn.textContent.trim(), 
+              button_location: btn.className
+            });
+          }
         });
       });
     });
