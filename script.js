@@ -143,4 +143,168 @@ document.addEventListener('DOMContentLoaded', function() {
             sessionStorage.setItem('popupClosed', 'true');
         }, 3000);
     });
+
+    // Benefits Carousel Functionality
+    const benefitsData = [
+        {
+            title: "Build muscle mass",
+            description: "Testosterone is crucial for building muscle mass. It helps increase protein synthesis, which promotes muscle growth, and stimulates the release of growth hormone, which stimulates muscle cell proliferation."
+        },
+        {
+            title: "Enhance your love life",
+            description: "Your libido is directly linked to your testosterone levels. When testosterone levels are low, you may experience a decrease in sexual desire and performance."
+        },
+        {
+            title: "Improve your energy",
+            description: "Higher testosterone levels can lead to increased energy levels, improved mood, and better overall health."
+        },
+        {
+            title: "Boost your focus",
+            description: "Your ability to concentrate and stay focused is directly linked to your testosterone levels. When testosterone levels are low, you may experience a decrease in focus and concentration."
+        }
+    ];
+
+    const benefitTitle = document.querySelector('.benefit-title');
+    const benefitDescription = document.querySelector('.benefit-description');
+    const benefitSlides = document.querySelectorAll('.benefit-slide');
+    const carouselDots = document.querySelectorAll('.carousel-dots .dot');
+    
+    let currentSlide = 0;
+    let carouselInterval;
+
+    function updateCarousel(slideIndex) {
+        // Update active slide
+        benefitSlides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === slideIndex);
+        });
+
+        // Update active dot
+        carouselDots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === slideIndex);
+        });
+
+        // Update text content
+        if (benefitTitle && benefitDescription) {
+            benefitTitle.textContent = benefitsData[slideIndex].title;
+            benefitDescription.textContent = benefitsData[slideIndex].description;
+        }
+
+        currentSlide = slideIndex;
+    }
+
+    function nextSlide() {
+        const nextIndex = (currentSlide + 1) % benefitsData.length;
+        updateCarousel(nextIndex);
+    }
+
+    function startCarousel() {
+        carouselInterval = setInterval(nextSlide, 4000); // Change slide every 4 seconds
+    }
+
+    function stopCarousel() {
+        clearInterval(carouselInterval);
+    }
+
+    // Initialize carousel if elements exist
+    if (benefitSlides.length > 0 && carouselDots.length > 0) {
+        updateCarousel(0);
+        startCarousel();
+
+        // Add click handlers for dots
+        carouselDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                stopCarousel();
+                updateCarousel(index);
+                startCarousel();
+            });
+        });
+    }
+
+    // Testimonials Carousel Functionality
+    const testimonialsTrack = document.querySelector('.testimonials-track');
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    const testimonialDots = document.querySelectorAll('.testimonials .dot');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    
+    let currentTestimonialSlide = 0;
+    let testimonialInterval;
+
+    function updateTestimonialsCarousel(slideIndex) {
+        // Calculate transform position
+        const translateX = -slideIndex * 25; // 25% per slide since each card is 25% width
+        testimonialsTrack.style.transform = `translateX(${translateX}%)`;
+
+        // Update active card
+        testimonialCards.forEach((card, index) => {
+            card.classList.toggle('active', index === slideIndex);
+        });
+
+        // Update active dot
+        testimonialDots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === slideIndex);
+        });
+
+        currentTestimonialSlide = slideIndex;
+    }
+
+    function nextTestimonialSlide() {
+        const nextIndex = (currentTestimonialSlide + 1) % testimonialCards.length;
+        updateTestimonialsCarousel(nextIndex);
+    }
+
+    function prevTestimonialSlide() {
+        const prevIndex = (currentTestimonialSlide - 1 + testimonialCards.length) % testimonialCards.length;
+        updateTestimonialsCarousel(prevIndex);
+    }
+
+    function startTestimonialCarousel() {
+        testimonialInterval = setInterval(nextTestimonialSlide, 5000); // Auto-advance every 5 seconds
+    }
+
+    function stopTestimonialCarousel() {
+        if (testimonialInterval) {
+            clearInterval(testimonialInterval);
+            testimonialInterval = null;
+        }
+    }
+
+    // Initialize testimonials carousel if elements exist
+    if (testimonialsTrack && testimonialCards.length > 0) {
+        updateTestimonialsCarousel(0);
+        startTestimonialCarousel();
+
+        // Add click handlers for navigation buttons
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                stopTestimonialCarousel();
+                nextTestimonialSlide();
+                startTestimonialCarousel();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                stopTestimonialCarousel();
+                prevTestimonialSlide();
+                startTestimonialCarousel();
+            });
+        }
+
+        // Add click handlers for dots
+        testimonialDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                stopTestimonialCarousel();
+                updateTestimonialsCarousel(index);
+                startTestimonialCarousel();
+            });
+        });
+
+        // Pause carousel on hover
+        const testimonialsCarousel = document.querySelector('.testimonials-carousel');
+        if (testimonialsCarousel) {
+            testimonialsCarousel.addEventListener('mouseenter', stopTestimonialCarousel);
+            testimonialsCarousel.addEventListener('mouseleave', startTestimonialCarousel);
+        }
+    }
 });
